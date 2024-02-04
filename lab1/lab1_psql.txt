@@ -1,0 +1,82 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Пароль користувача postgres:
+psql (15.2)
+УВАГА: Кодова стор?нка консол? (866) в?др?зняється в?д кодової стор?нки Windows (1251)
+         8-б?тов? символи можуть працювати неправильно. Детальн?ше у розд?л?
+         "Нотатки для користувач?в Windows" у документац?ї psql.
+Введ?ть "help", щоб отримати допомогу.
+
+postgres=# psql \! chcp 1251
+Текущая кодовая страница: 1251
+postgres-#
+postgres-# asd
+postgres-# create database lab1_2024;
+ПОМИЛКА:  синтаксична помилка в або поблизу "psql"
+РЯДОК 1: psql
+         ^
+postgres=# create database lab1_2024;
+CREATE DATABASE
+postgres=# create user l1_user with password '111';
+CREATE ROLE
+postgres=# grant all on schema public to public;
+GRANT
+postgres=# \c lab1_2024
+Ви тепер під'єднані до бази даних "lab1_2024" як користувач "postgres".
+lab1_2024=# grant all on schema public to public;
+GRANT
+lab1_2024=# grant all on database lab1_2024 to l1_user;
+GRANT
+lab1_2024=# \c lab1_2024 l1_user;
+Пароль користувача l1_user:
+Ви тепер під'єднані до бази даних "lab1_2024" як користувач "l1_user".
+                                
+lab1_2024=> CREATE TABLE students (id integer PRIMARY KEY,  name varchar(255),  second_name varchar(255));
+CREATE TABLE
+lab1_2024=> CREATE TABLE subjects (id integer PRIMARY KEY,  name varchar(255));
+CREATE TABLE
+lab1_2024=> CREATE TABLE grades (id integer PRIMARY KEY, student_id integer, subject_id integer,  grade integer);
+CREATE TABLE
+lab1_2024=> ALTER TABLE grades ADD FOREIGN KEY (student_id) REFERENCES students (id);
+ALTER TABLE
+lab1_2024=> ALTER TABLE grades ADD FOREIGN KEY (subject_id) REFERENCES subjects (id);
+ALTER TABLE
+
+lab1_2024=> \dt
+           Список відношень
+ Схема  |  Назва   |   Тип   | Власник
+--------+----------+---------+---------
+ public | grades   | таблиця | l1_user
+ public | students | таблиця | l1_user
+ public | subjects | таблиця | l1_user
+(3 рядки)
+
+
+lab1_2024=> INSERT INTO students (id, name, second_name) VALUES (1, 'John', 'Doe');
+INSERT 0 1
+lab1_2024=> INSERT INTO subjects (id, name) VALUES (1, 'Math');
+INSERT 0 1
+lab1_2024=> INSERT INTO grades (id, student_id, subject_id, grade) VALUES (1, 1, 1, 95);
+INSERT 0 1
+
+lab1_2024=> select * from students;
+ id | name | second_name
+----+------+-------------
+  1 | John | Doe
+(1 рядок)
+
+lab1_2024=> select * from subjects;
+ id | name
+----+------
+  1 | Math
+(1 рядок)
+
+lab1_2024=> select * from grades;
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  1 |          1 |          1 |    95
+(1 рядок)
+
+lab1_2024=>
