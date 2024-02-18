@@ -1,0 +1,801 @@
+1) Все данные из таблицы students
+SELECT * FROM students;
+ id |  name   | second_name | age | group_id
+----+---------+-------------+-----+----------
+  1 | John    | Doe         |  20 |        1
+  2 | Alice   | Smith       |  22 |        2
+  3 | Bob     | Johnson     |  21 |        1
+  4 | Eva     | Brown       |  23 |        3
+  5 | Charlie | Davis       |  19 |        2
+
+2) Имена всех студентов
+SELECT name FROM students;
+  name
+---------
+ John
+ Alice
+ Bob
+ Eva
+ Charlie
+
+3) Студенты, возраст которых больше 21
+SELECT * FROM students WHERE age > 21; 
+ id | name  | second_name | age | group_id
+----+-------+-------------+-----+----------
+  2 | Alice | Smith       |  22 |        2
+  4 | Eva   | Brown       |  23 |        3
+
+3) Студенты в алфавитном порядке по именам
+SELECT * FROM students ORDER BY name;
+ id |  name   | second_name | age | group_id
+----+---------+-------------+-----+----------
+  2 | Alice   | Smith       |  22 |        2
+  3 | Bob     | Johnson     |  21 |        1
+  5 | Charlie | Davis       |  19 |        2
+  4 | Eva     | Brown       |  23 |        3
+  1 | John    | Doe         |  20 |        1
+
+4) Студенты из группы с id 1
+SELECT * FROM students WHERE group_id = 1;
+ id | name | second_name | age | group_id
+----+------+-------------+-----+----------
+  1 | John | Doe         |  20 |        1
+  3 | Bob  | Johnson     |  21 |        1
+
+5) Средний возраст всех студентов
+SELECT AVG(age) FROM students;
+         avg
+---------------------
+ 21.0000000000000000
+
+6) Количество студентов в каждой группе
+SELECT group_id, COUNT(*) FROM students GROUP BY group_id;
+ group_id | count
+----------+-------
+        2 |     2
+        3 |     1
+        1 |     2
+
+7) Уникальные значения возрастов студентов
+SELECT DISTINCT age FROM students;
+ age
+-----
+  22
+  19
+  21
+  20
+  23
+
+8) Студенты, у которых возраст меньше 25 и они из группы 2
+SELECT * FROM students WHERE age < 25 AND group_id = 2;
+ id |  name   | second_name | age | group_id
+----+---------+-------------+-----+----------
+  2 | Alice   | Smith       |  22 |        2
+  5 | Charlie | Davis       |  19 |        2
+
+9) Студенты, у которых имя начинается с 'A'
+SELECT * FROM students WHERE name LIKE 'A%';
+ id | name  | second_name | age | group_id
+----+-------+-------------+-----+----------
+  2 | Alice | Smith       |  22 |        2
+
+9) Студенты, у которых возраст больше 18 и второе имя не пустое
+SELECT * FROM students WHERE age > 20 AND second_name IS NOT NULL;
+ id | name  | second_name | age | group_id
+----+-------+-------------+-----+----------
+  2 | Alice | Smith       |  22 |        2
+  3 | Bob   | Johnson     |  21 |        1
+  4 | Eva   | Brown       |  23 |        3
+
+10) Студенты, у которых второе имя начинается с 'D'
+SELECT * FROM students WHERE second_name LIKE 'D%';
+ id |  name   | second_name | age | group_id
+----+---------+-------------+-----+----------
+  1 | John    | Doe         |  20 |        1
+  5 | Charlie | Davis       |  19 |        2
+
+11) Пять студентов, которые отсортированы по возрасту
+SELECT * FROM students ORDER BY age DESC LIMIT 5;
+ id |  name   | second_name | age | group_id
+----+---------+-------------+-----+----------
+  4 | Eva     | Brown       |  23 |        3
+  2 | Alice   | Smith       |  22 |        2
+  3 | Bob     | Johnson     |  21 |        1
+  1 | John    | Doe         |  20 |        1
+  5 | Charlie | Davis       |  19 |        2
+
+12) Студенты, у которых второе имя начинается с 'S' и они из группы 1
+SELECT * FROM students WHERE second_name LIKE 'S%' AND group_id = 1;
+ id | name | second_name | age | group_id
+----+------+-------------+-----+----------
+
+13) Студенты, у которых возраст равен 21 или 22
+SELECT * FROM students WHERE age IN (21, 22);
+ id | name  | second_name | age | group_id
+----+-------+-------------+-----+----------
+  2 | Alice | Smith       |  22 |        2
+  3 | Bob   | Johnson     |  21 |        1
+
+14) Студенты, у которых второе имя задано и оно не начинается с 'M'
+SELECT * FROM students WHERE second_name IS NOT NULL AND second_name NOT LIKE 'M%';
+ id |  name   | second_name | age | group_id
+----+---------+-------------+-----+----------
+  1 | John    | Doe         |  20 |        1
+  2 | Alice   | Smith       |  22 |        2
+  3 | Bob     | Johnson     |  21 |        1
+  4 | Eva     | Brown       |  23 |        3
+  5 | Charlie | Davis       |  19 |        2
+
+15) Студенты, у которых возраст меньше 20 или больше 25
+SELECT * FROM students WHERE age < 20 OR age > 25;
+ id |  name   | second_name | age | group_id
+----+---------+-------------+-----+----------
+  5 | Charlie | Davis       |  19 |        2
+
+16)Студенты, у которых имя не 'John' и не 'Alice'
+SELECT * FROM students WHERE name NOT IN ('John', 'Alice');
+ id |  name   | second_name | age | group_id
+----+---------+-------------+-----+----------
+  3 | Bob     | Johnson     |  21 |        1
+  4 | Eva     | Brown       |  23 |        3
+  5 | Charlie | Davis       |  19 |        2
+
+17) Студенты, у которых возраст больше среднего возраста (21)
+SELECT * FROM students WHERE age > (SELECT AVG(age) FROM students);
+ id | name  | second_name | age | group_id
+----+-------+-------------+-----+----------
+  2 | Alice | Smith       |  22 |        2
+  4 | Eva   | Brown       |  23 |        3
+
+18) Студенты, у которых имя содержит букву 'o'
+SELECT * FROM students WHERE name LIKE '%o%';
+ id | name | second_name | age | group_id
+----+------+-------------+-----+----------
+  1 | John | Doe         |  20 |        1
+  3 | Bob  | Johnson     |  21 |        1
+
+19) Студенты, у которых второе имя задано и оно не равно 'Doe'
+SELECT * FROM students WHERE second_name IS NOT NULL AND second_name != 'Doe';
+ id |  name   | second_name | age | group_id
+----+---------+-------------+-----+----------
+  2 | Alice   | Smith       |  22 |        2
+  3 | Bob     | Johnson     |  21 |        1
+  4 | Eva     | Brown       |  23 |        3
+  5 | Charlie | Davis       |  19 |        2
+
+20) Студенты, у которых возраст нечетный
+SELECT * FROM students WHERE age % 2 = 1;
+ id |  name   | second_name | age | group_id
+----+---------+-------------+-----+----------
+  3 | Bob     | Johnson     |  21 |        1
+  4 | Eva     | Brown       |  23 |        3
+  5 | Charlie | Davis       |  19 |        2
+
+21) Студенты, у которых группа не указана (NULL)
+SELECT * FROM students WHERE group_id IS NULL;
+ id | name | second_name | age | group_id
+----+------+-------------+-----+----------
+
+22) Все данные из таблицы groups
+lab1_2024=> SELECT * FROM groups;
+ id |  name   | course | count
+----+---------+--------+-------
+  1 | Group A |      1 |    30
+  2 | Group B |      2 |    25
+  3 | Group C |      3 |    28
+  4 | Group D |      1 |    32
+  5 | Group E |      2 |    27
+
+23) Названия всех групп
+lab1_2024=> SELECT name FROM groups;
+  name
+---------
+ Group A
+ Group B
+ Group C
+ Group D
+ Group E
+
+24) Количество курсов всех групп
+lab1_2024=> SELECT course FROM groups;
+ course
+--------
+      1
+      2
+      3
+      1
+      2
+
+25) Группы, у которых курс равен 2
+lab1_2024=> SELECT * FROM groups WHERE course = 2;
+ id |  name   | course | count
+----+---------+--------+-------
+  2 | Group B |      2 |    25
+  5 | Group E |      2 |    27
+
+26) Группы, у которых количество студентов больше 30
+lab1_2024=> SELECT * FROM groups WHERE count > 30;
+ id |  name   | course | count
+----+---------+--------+-------
+  4 | Group D |      1 |    32
+
+27) Группы в порядке убывания курсов
+lab1_2024=> SELECT * FROM groups ORDER BY course DESC;
+ id |  name   | course | count
+----+---------+--------+-------
+  3 | Group C |      3 |    28
+  2 | Group B |      2 |    25
+  5 | Group E |      2 |    27
+  1 | Group A |      1 |    30
+  4 | Group D |      1 |    32
+
+28) Группы с наибольшим количеством студентов
+lab1_2024=> SELECT * FROM groups ORDER BY count DESC LIMIT 1;
+ id |  name   | course | count
+----+---------+--------+-------
+  4 | Group D |      1 |    32
+
+29) Среднее количество студентов в группах
+lab1_2024=> SELECT AVG(count) FROM groups;
+         avg
+---------------------
+ 28.4000000000000000
+
+30) Уникальные значения курсов групп
+lab1_2024=> SELECT DISTINCT course FROM groups;
+ course
+--------
+      3
+      2
+      1
+
+31) Группы, у которых курс не входит в [1, 3]
+lab1_2024=> SELECT * FROM groups WHERE course NOT IN (1, 3);
+ id |  name   | course | count
+----+---------+--------+-------
+  2 | Group B |      2 |    25
+  5 | Group E |      2 |    27
+
+32) Группы, у которых название начинается с 'Group'
+lab1_2024=> SELECT * FROM groups WHERE name LIKE 'Group%';
+ id |  name   | course | count
+----+---------+--------+-------
+  1 | Group A |      1 |    30
+  2 | Group B |      2 |    25
+  3 | Group C |      3 |    28
+  4 | Group D |      1 |    32
+  5 | Group E |      2 |    27
+
+33) Группы, у которых курс больше 1 и количество студентов больше 25
+lab1_2024=> SELECT * FROM groups WHERE course > 1 AND count > 25;
+ id |  name   | course | count
+----+---------+--------+-------
+  3 | Group C |      3 |    28
+  5 | Group E |      2 |    27
+
+34) Две группы с самым маленьким количеством студентов
+lab1_2024=> SELECT * FROM groups ORDER BY count ASC LIMIT 2;
+ id |  name   | course | count
+----+---------+--------+-------
+  2 | Group B |      2 |    25
+  5 | Group E |      2 |    27
+
+35) Группы, у которых название не 'Group A' и не 'Group B'
+lab1_2024=> SELECT * FROM groups WHERE name NOT IN ('Group A', 'Group B');
+ id |  name   | course | count
+----+---------+--------+-------
+  3 | Group C |      3 |    28
+  4 | Group D |      1 |    32
+  5 | Group E |      2 |    27
+
+36) Группы, у которых курс меньше 3 и название начинается с 'G'
+lab1_2024=> SELECT * FROM groups WHERE course < 3 AND name LIKE 'G%';
+ id |  name   | course | count
+----+---------+--------+-------
+  1 | Group A |      1 |    30
+  2 | Group B |      2 |    25
+  4 | Group D |      1 |    32
+  5 | Group E |      2 |    27
+
+37) Группы, у которых количество студентов между 20 и 30
+lab1_2024=> SELECT * FROM groups WHERE count BETWEEN 20 AND 30;
+ id |  name   | course | count
+----+---------+--------+-------
+  1 | Group A |      1 |    30
+  2 | Group B |      2 |    25
+  3 | Group C |      3 |    28
+  5 | Group E |      2 |    27
+
+38) Группы, у которых курс нечетный
+lab1_2024=> SELECT * FROM groups WHERE course % 2 = 1;
+ id |  name   | course | count
+----+---------+--------+-------
+  1 | Group A |      1 |    30
+  3 | Group C |      3 |    28
+  4 | Group D |      1 |    32
+
+39) Группы, у которых название содержит букву 'o'
+lab1_2024=> SELECT * FROM groups WHERE name LIKE '%o%';
+ id |  name   | course | count
+----+---------+--------+-------
+  1 | Group A |      1 |    30
+  2 | Group B |      2 |    25
+  3 | Group C |      3 |    28
+  4 | Group D |      1 |    32
+  5 | Group E |      2 |    27
+
+40) Группы, у которых количество студентов больше среднего количества
+lab1_2024=> SELECT * FROM groups WHERE count > (SELECT AVG(count) FROM groups);
+ id |  name   | course | count
+----+---------+--------+-------
+  1 | Group A |      1 |    30
+  4 | Group D |      1 |    32
+
+41) Группы, у которых название не равно 'Group C'
+lab1_2024=> SELECT * FROM groups WHERE name != 'Group C';
+ id |  name   | course | count
+----+---------+--------+-------
+  1 | Group A |      1 |    30
+  2 | Group B |      2 |    25
+  4 | Group D |      1 |    32
+  5 | Group E |      2 |    27
+
+42) Группы, у которых курс не входит в [2, 4, 6]
+lab1_2024=> SELECT * FROM groups WHERE course NOT IN (2, 4, 6);
+ id |  name   | course | count
+----+---------+--------+-------
+  1 | Group A |      1 |    30
+  3 | Group C |      3 |    28
+  4 | Group D |      1 |    32
+
+43) Группы, у которых количество студентов нечетное
+lab1_2024=> SELECT * FROM groups WHERE count % 2 = 1;
+ id |  name   | course | count
+----+---------+--------+-------
+  2 | Group B |      2 |    25
+  5 | Group E |      2 |    27
+
+44) Все данные из таблицы subjects
+lab1_2024=> SELECT * FROM subjects;
+ id |   name    |   teacher   | type_id
+----+-----------+-------------+---------
+  1 | Math      | Mr. White   |       1
+  2 | Physics   | Mrs. Green  |       2
+  3 | Chemistry | Dr. Black   |       1
+  4 | History   | Ms. Grey    |       3
+  5 | Biology   | Prof. Brown |       2
+
+45) Названия всех предметов
+lab1_2024=> SELECT name FROM subjects;
+   name
+-----------
+ Math
+ Physics
+ Chemistry
+ History
+ Biology
+
+46) Предметы, у которых имя начинается с 'Math'
+lab1_2024=> SELECT * FROM subjects WHERE name LIKE 'Math%';
+ id | name |  teacher  | type_id
+----+------+-----------+---------
+  1 | Math | Mr. White |       1
+
+47) Предметы, у которых преподаватель - 'Dr. Black'
+lab1_2024=> SELECT * FROM subjects WHERE teacher = 'Dr. Black';
+ id |   name    |  teacher  | type_id
+----+-----------+-----------+---------
+  3 | Chemistry | Dr. Black |       1
+
+48) Предметы, у которых тип - лекция
+lab1_2024=> SELECT * FROM subjects WHERE type_id = 1;
+ id |   name    |  teacher  | type_id
+----+-----------+-----------+---------
+  1 | Math      | Mr. White |       1
+  3 | Chemistry | Dr. Black |       1
+
+49) Предметы в порядке убывания их id
+lab1_2024=> SELECT * FROM subjects ORDER BY id DESC;
+ id |   name    |   teacher   | type_id
+----+-----------+-------------+---------
+  5 | Biology   | Prof. Brown |       2
+  4 | History   | Ms. Grey    |       3
+  3 | Chemistry | Dr. Black   |       1
+  2 | Physics   | Mrs. Green  |       2
+  1 | Math      | Mr. White   |       1
+
+50) Предметы с наибольшим id
+lab1_2024=> SELECT * FROM subjects ORDER BY id DESC LIMIT 1;
+ id |  name   |   teacher   | type_id
+----+---------+-------------+---------
+  5 | Biology | Prof. Brown |       2
+
+51) Средний id всех предметов
+lab1_2024=> SELECT AVG(id) FROM subjects;
+        avg
+--------------------
+ 3.0000000000000000
+
+52) Уникальные значения типов предметов
+lab1_2024=> SELECT DISTINCT type_id FROM subjects;
+ type_id
+---------
+       2
+       3
+       1
+
+53) Предметы, у которых id типа не входит в [2, 3]
+lab1_2024=> SELECT * FROM subjects WHERE type_id NOT IN (2, 3);
+ id |   name    |  teacher  | type_id
+----+-----------+-----------+---------
+  1 | Math      | Mr. White |       1
+  3 | Chemistry | Dr. Black |       1
+
+54) Предметы, у которых имя содержит букву 'o'
+lab1_2024=> SELECT * FROM subjects WHERE name LIKE '%o%';
+ id |  name   |   teacher   | type_id
+----+---------+-------------+---------
+  4 | History | Ms. Grey    |       3
+  5 | Biology | Prof. Brown |       2
+
+55) Предметы, у которых тип не лекция и не семинар
+lab1_2024=> SELECT * FROM subjects WHERE type_id NOT IN (1, 3);
+ id |  name   |   teacher   | type_id
+----+---------+-------------+---------
+  2 | Physics | Mrs. Green  |       2
+  5 | Biology | Prof. Brown |       2
+
+56) Два предмета с наименьшими id
+lab1_2024=> SELECT * FROM subjects ORDER BY id ASC LIMIT 2;
+ id |  name   |  teacher   | type_id
+----+---------+------------+---------
+  1 | Math    | Mr. White  |       1
+  2 | Physics | Mrs. Green |       2
+
+57) Предметы, у которых имя не 'Math' и не 'Physics'
+lab1_2024=> SELECT * FROM subjects WHERE name NOT IN ('Math', 'Physics');
+ id |   name    |   teacher   | type_id
+----+-----------+-------------+---------
+  3 | Chemistry | Dr. Black   |       1
+  4 | History   | Ms. Grey    |       3
+  5 | Biology   | Prof. Brown |       2
+
+58) Предметы, у которых id типа между 2 и 3
+lab1_2024=> SELECT * FROM subjects WHERE type_id BETWEEN 2 AND 3;
+ id |  name   |   teacher   | type_id
+----+---------+-------------+---------
+  2 | Physics | Mrs. Green  |       2
+  4 | History | Ms. Grey    |       3
+  5 | Biology | Prof. Brown |       2
+
+59) Предметы, у которых имя не равно 'Chemistry'
+lab1_2024=> SELECT * FROM subjects WHERE name != 'Chemistry';
+ id |  name   |   teacher   | type_id
+----+---------+-------------+---------
+  1 | Math    | Mr. White   |       1
+  2 | Physics | Mrs. Green  |       2
+  4 | History | Ms. Grey    |       3
+  5 | Biology | Prof. Brown |       2
+
+60) Предметы, у которых id типа нечетный
+lab1_2024=> SELECT * FROM subjects WHERE type_id % 2 = 1;
+ id |   name    |  teacher  | type_id
+----+-----------+-----------+---------
+  1 | Math      | Mr. White |       1
+  3 | Chemistry | Dr. Black |       1
+  4 | History   | Ms. Grey  |       3
+
+61) Предметы, у которых имя не начинается с 'History' и не заканчивается на 'y'
+lab1_2024=> SELECT * FROM subjects WHERE NOT (name LIKE 'History%' AND name LIKE '%y');
+ id |   name    |   teacher   | type_id
+----+-----------+-------------+---------
+  1 | Math      | Mr. White   |       1
+  2 | Physics   | Mrs. Green  |       2
+  5 | Biology   | Prof. Brown |       2
+
+62) Предметы, у которых преподаватель начинается с 'Mr.'
+lab1_2024=> SELECT * FROM subjects WHERE teacher LIKE 'Mr.%';
+ id | name |  teacher  | type_id
+----+------+-----------+---------
+  1 | Math | Mr. White |       1
+
+63) Предметы, у которых имя содержит буквы 'e' и 's'
+lab1_2024=> SELECT * FROM subjects WHERE name ~ 'e.*s' OR name ~ 's.*e';
+ id |   name    |  teacher  | type_id
+----+-----------+-----------+---------
+  3 | Chemistry | Dr. Black |       1
+
+64) Все данные из таблицы grades
+lab1_2024=> SELECT * FROM grades;
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  1 |          1 |          1 |    85
+  2 |          2 |          3 |    92
+  3 |          3 |          2 |    78
+  4 |          4 |          5 |    89
+  5 |          5 |          4 |    95
+  6 |          1 |          5 |    95
+  7 |          1 |          2 |    92
+  8 |          5 |          2 |    98
+  9 |          4 |          5 |    89
+ 10 |          3 |          2 |    91
+ 
+65) Оценки студента с id = 1
+lab1_2024=> SELECT * FROM grades WHERE student_id = 1;
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  1 |          1 |          1 |    85
+  6 |          1 |          5 |    95
+  7 |          1 |          2 |    92
+
+66) Оценки предмета с id = 3
+lab1_2024=> SELECT * FROM grades WHERE subject_id = 3;
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  2 |          2 |          3 |    92
+
+67) Оценки выше 90
+lab1_2024=> SELECT * FROM grades WHERE grade > 90;
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  2 |          2 |          3 |    92
+  5 |          5 |          4 |    95
+  6 |          1 |          5 |    95
+  7 |          1 |          2 |    92
+  8 |          5 |          2 |    98
+ 10 |          3 |          2 |    91
+
+68) Средние оценки по предмету
+lab1_2024=> SELECT subject_id, AVG(grade) FROM grades GROUP BY subject_id;
+ subject_id |         avg
+------------+---------------------
+          3 | 92.0000000000000000
+          5 | 91.0000000000000000
+          4 | 95.0000000000000000
+          2 | 89.7500000000000000
+          1 | 85.0000000000000000
+
+69) Максимальная оценка по каждому предмету
+lab1_2024=> SELECT subject_id, MAX(grade) FROM grades GROUP BY subject_id;
+ subject_id | max
+------------+-----
+          3 |  92
+          5 |  95
+          4 |  95
+          2 |  98
+          1 |  85
+
+70) Количество оценок выше 80
+lab1_2024=> SELECT COUNT(*) FROM grades WHERE grade > 80;
+ count
+-------
+     9
+
+71) Оценки, у которых балл нечетный
+lab1_2024=> SELECT * FROM grades WHERE grade % 2 = 1;
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  1 |          1 |          1 |    85
+  4 |          4 |          5 |    89
+  5 |          5 |          4 |    95
+  6 |          1 |          5 |    95
+  9 |          4 |          5 |    89
+ 10 |          3 |          2 |    91
+
+72) Оценки, у которых балл не входит в [60, 65, 70]
+lab1_2024=> SELECT * FROM grades WHERE grade NOT IN (60, 65, 70);
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  1 |          1 |          1 |    85
+  2 |          2 |          3 |    92
+  3 |          3 |          2 |    78
+  4 |          4 |          5 |    89
+  5 |          5 |          4 |    95
+  6 |          1 |          5 |    95
+  7 |          1 |          2 |    92
+  8 |          5 |          2 |    98
+  9 |          4 |          5 |    89
+ 10 |          3 |          2 |    91
+
+73) Оценки, у которых балл меньше среднего балла
+lab1_2024=> SELECT * FROM grades WHERE grade < (SELECT AVG(grade) FROM grades);
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  1 |          1 |          1 |    85
+  3 |          3 |          2 |    78
+  4 |          4 |          5 |    89
+  9 |          4 |          5 |    89
+
+74) Оценки, у которых студенты из группы 1
+lab1_2024=> SELECT * FROM grades g JOIN students s ON g.student_id = s.id WHERE s.group_id = 1;
+ id | student_id | subject_id | grade | id | name | second_name | age | group_id
+----+------------+------------+-------+----+------+-------------+-----+----------
+  1 |          1 |          1 |    85 |  1 | John | Doe         |  20 |        1
+  3 |          3 |          2 |    78 |  3 | Bob  | Johnson     |  21 |        1
+  6 |          1 |          5 |    95 |  1 | John | Doe         |  20 |        1
+  7 |          1 |          2 |    92 |  1 | John | Doe         |  20 |        1
+ 10 |          3 |          2 |    91 |  3 | Bob  | Johnson     |  21 |        1
+
+75) Оценки, у которых балл больше среднего балла по предмету 'Physics'
+lab1_2024=> SELECT g.* FROM grades g JOIN subjects s ON g.subject_id = s.id WHERE s.name = 'Physics' AND g.grade > (SELECT AVG(grade) FROM grades WHERE subject_id = s.id);
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  7 |          1 |          2 |    92
+  8 |          5 |          2 |    98
+ 10 |          3 |          2 |    91
+
+76) Оценки, у которых балл не входит в [85, 90, 95]
+lab1_2024=> SELECT * FROM grades WHERE grade NOT IN (85, 90, 95);
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  2 |          2 |          3 |    92
+  3 |          3 |          2 |    78
+  4 |          4 |          5 |    89
+  7 |          1 |          2 |    92
+  8 |          5 |          2 |    98
+  9 |          4 |          5 |    89
+ 10 |          3 |          2 |    91
+
+77) Оценки, у которых предмет начинается с 'M'
+lab1_2024=> SELECT g.* FROM grades g JOIN subjects s ON g.subject_id = s.id WHERE s.name LIKE 'M%';
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  1 |          1 |          1 |    85
+
+78) Оценки, у которых предметы с типом 'Exam'
+lab1_2024=> SELECT g.* FROM grades g JOIN subjects s ON g.subject_id = s.id JOIN subj_types st ON s.type_id = st.id WHERE st.type = 'Exam';
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  5 |          5 |          4 |    95
+
+79) Оценки, у которых балл равен максимальному баллу в таблице
+lab1_2024=> SELECT * FROM grades WHERE grade = (SELECT MAX(grade) FROM grades);
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  8 |          5 |          2 |    98
+
+80) Оценки, у которых балл входит в (от 70 до 90, не включая 90)
+lab1_2024=> SELECT * FROM grades WHERE grade >= 70 AND grade < 90;
+ id | student_id | subject_id | grade
+----+------------+------------+-------
+  1 |          1 |          1 |    85
+  3 |          3 |          2 |    78
+  4 |          4 |          5 |    89
+  9 |          4 |          5 |    89
+
+81) Все данные из таблицы subj_types
+lab1_2024=> SELECT * FROM subj_types;
+ id |  type
+----+---------
+  1 | Lecture
+  2 | Seminar
+  3 | Exam
+
+82) Типы предметов, у которых id нечетный
+lab1_2024=> SELECT * FROM subj_types WHERE id % 2 = 1;
+ id |  type
+----+---------
+  1 | Lecture
+  3 | Exam
+
+83) Уникальные значения типов предметов
+lab1_2024=> SELECT DISTINCT type FROM subj_types;
+  type
+---------
+ Lecture
+ Exam
+ Seminar
+
+84) Типы предметов, у которых название начинается с 'Lecture'
+lab1_2024=> SELECT * FROM subj_types WHERE type LIKE 'Lecture%';
+ id |  type
+----+---------
+  1 | Lecture
+
+85) Типы предметов, у которых id больше 2
+lab1_2024=> SELECT * FROM subj_types WHERE id > 2;
+ id | type
+----+------
+  3 | Exam
+
+86) Типы предметов в порядке убывания их id
+lab1_2024=> SELECT * FROM subj_types ORDER BY id DESC;
+ id |  type
+----+---------
+  3 | Exam
+  2 | Seminar
+  1 | Lecture
+
+87) Типы предметов с наибольшим id
+lab1_2024=> SELECT * FROM subj_types ORDER BY id DESC LIMIT 1;
+ id | type
+----+------
+  3 | Exam
+
+89) Средний id всех типов предметов
+lab1_2024=> SELECT AVG(id) FROM subj_types;
+        avg
+--------------------
+ 2.0000000000000000
+(1 рядок)
+
+90) Типы предметов, у которых название не 'Lab'
+lab1_2024=> SELECT * FROM subj_types WHERE type != 'Lab';
+ id |  type
+----+---------
+  1 | Lecture
+  2 | Seminar
+  3 | Exam
+
+91) Типы предметов, у которых id входит в [1, 3, 5]:
+lab1_2024=> SELECT * FROM subj_types WHERE id IN (1, 3, 5);
+ id |  type
+----+---------
+  1 | Lecture
+  3 | Exam
+
+92) Типы предметов, у которых название не равно 'Exam'
+lab1_2024=> SELECT * FROM subj_types WHERE type != 'Exam';
+ id |  type
+----+---------
+  1 | Lecture
+  2 | Seminar
+
+93) Пять типов предметов с самыми маленькими id
+lab1_2024=> SELECT * FROM subj_types ORDER BY id ASC LIMIT 5;
+ id |  type
+----+---------
+  1 | Lecture
+  2 | Seminar
+  3 | Exam
+
+94) Типы предметов, у которых название не начинается с 'Lab' и не заканчивается на 'y'
+lab1_2024=> SELECT * FROM subj_types WHERE NOT (type LIKE 'Lab%' AND type LIKE '%y');
+ id |  type
+----+---------
+  1 | Lecture
+  2 | Seminar
+  3 | Exam
+
+95) Типы предметов, у которых id не входит в [2, 4, 6]
+lab1_2024=> SELECT * FROM subj_types WHERE id NOT IN (2, 4, 6);
+ id |  type
+----+---------
+  1 | Lecture
+  3 | Exam
+
+96) Типы предметов, у которых название не начинается с 'E' и не содержит букву 'a'
+lab1_2024=> SELECT * FROM subj_types WHERE NOT (type LIKE 'E%' AND type LIKE '%a%');
+ id |  type
+----+---------
+  1 | Lecture
+  2 | Seminar
+
+97) Типы предметов, у которых название начинается с 'Exam' и содержит цифры
+lab1_2024=> SELECT * FROM subj_types WHERE NOT (type LIKE '% %');
+ id |  type
+----+---------
+  1 | Lecture
+  2 | Seminar
+  3 | Exam
+
+98) Типы предметов, у которых название не равно 'Lecture'
+lab1_2024=> SELECT * FROM subj_types WHERE type != 'Lecture';
+ id |  type
+----+---------
+  2 | Seminar
+  3 | Exam
+
+99) Типы предметов, у которых название начинается с 'E' и содержит букву 'a'
+lab1_2024=> SELECT * FROM subj_types WHERE type LIKE 'E%a%';
+ id | type
+----+------
+  3 | Exam
+
+100) Типы предметов, у которых id типа входит в подзапрос
+lab1_2024=> SELECT * FROM subj_types WHERE id IN (SELECT type_id FROM subjects);
+ id |  type
+----+---------
+  1 | Lecture
+  2 | Seminar
+  3 | Exam
