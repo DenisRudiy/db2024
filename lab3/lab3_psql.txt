@@ -1,0 +1,89 @@
+CREATE OR REPLACE PROCEDURE add_student(
+    stud_id INTEGER, 
+    stud_name VARCHAR(255), 
+    stud_second_name VARCHAR(255), 
+    stud_age INTEGER, stud_group_id INTEGER
+    ) 
+LANGUAGE SQL AS 
+$$ 
+    INSERT INTO students (id, name, second_name, age, group_id) 
+    VALUES (stud_id, stud_name, stud_second_name, stud_age, stud_group_id); 
+$$;
+
+CALL add_student(1, 'Name', 'Sec_name', 1, 1);
+
+CREATE OR REPLACE PROCEDURE add_group(
+    gr_id INTEGER, 
+    gr_name VARCHAR(255), 
+    gr_course INTEGER, 
+    gr_count INTEGER
+    ) 
+LANGUAGE SQL AS 
+$$ 
+    INSERT INTO groups (id, name, course, count) 
+    VALUES (gr_id, gr_name, gr_course, gr_count);
+$$;
+
+CREATE OR REPLACE PROCEDURE add_grade(
+    grade_id INTEGER, 
+    stud_id INTEGER, 
+    subj_id INTEGER, 
+    grade INTEGER
+    ) 
+LANGUAGE SQL AS 
+$$ 
+    INSERT INTO grades (id, student_id, subject_id, grade) 
+    VALUES (grade_id, stud_id, subj_id, grade); 
+$$;
+
+CREATE OR REPLACE FUNCTION show_stud() 
+RETURNS TABLE (
+    stud_id INTEGER, 
+    stud_name VARCHAR(255), 
+    stud_second_name VARCHAR(255), 
+    stud_age INTEGER, 
+    stud_group_id INTEGER
+    )
+AS $$ BEGIN 
+    RETURN QUERY SELECT * FROM students; 
+END; $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION get_stud_by_group(group_id INTEGER) 
+RETURNS TABLE (
+    stud_id INTEGER, 
+    stud_name VARCHAR(255), 
+    stud_second_name VARCHAR(255),
+    stud_age INTEGER
+    ) 
+AS $$ BEGIN 
+    RETURN QUERY SELECT id, name, second_name, age 
+    FROM students WHERE students.group_id = get_stud_by_group.group_id; 
+END; $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION get_grades_by_stud_id(stud_id INTEGER) 
+RETURNS TABLE (
+    grade_id INTEGER, 
+    subj_id INTEGER, 
+    grade_val INTEGER
+    ) 
+AS $$ BEGIN 
+    RETURN QUERY SELECT id, subj_id, grade 
+    FROM grades WHERE grades.student_id = get_grades_by_stud_id.stud_id;
+END; $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION del_by_group() RETURNS TRIGGER AS $$ 
+BEGIN 
+  DELETE FROM students WHERE group_id = OLD.id;
+  RETURN OLD; 
+END; 
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER del_by_group_trigger 
+BEFORE DELETE ON groups 
+FOR EACH ROW 
+EXECUTE FUNCTION del_by_group(); 
+
+create or replace procedure update_std_ids(in deleted_student_id INT) language plpgsql as $$ begin update students set id = id - 1 where id > deleted_student_id; end; $$;
+
+БРАТИ СЕРЕДНІЙ БАЛ СТУДЕНТІВ
+ЗМІНЮВАТИ КІЛЬКІСТЬ СТУДЕНТІВ В ГРУПІ (COUNT)
