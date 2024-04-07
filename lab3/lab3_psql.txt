@@ -87,3 +87,33 @@ create or replace procedure update_std_ids(in deleted_student_id INT) language p
 
 БРАТИ СЕРЕДНІЙ БАЛ СТУДЕНТІВ
 ЗМІНЮВАТИ КІЛЬКІСТЬ СТУДЕНТІВ В ГРУПІ (COUNT)
+
+
+CREATE OR REPLACE PROCEDURE get_average_grade_for_student(std_id INT)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    total_grade NUMERIC := 0;
+    subject_count INT := 0;
+    average_grade NUMERIC;
+    grade_rec RECORD;
+BEGIN
+    total_grade := 0;
+    subject_count := 0;
+
+    FOR grade_rec IN SELECT grade FROM grades WHERE student_id = std_id LOOP
+        total_grade := total_grade + grade_rec.grade;
+        subject_count := subject_count + 1;
+    END LOOP;
+
+    IF subject_count = 0 THEN
+        RAISE EXCEPTION 'No grades found for std_id: %', std_id;
+    END IF;
+
+    average_grade := total_grade / subject_count;
+
+    RAISE NOTICE 'Average grade for std_id %: %', std_id, average_grade;
+END;
+$$;
+
+call get_average_grade_for_student(5);
