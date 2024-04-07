@@ -1,0 +1,28 @@
+{
+  "groups": [
+    {
+      "count": 30,
+      "course": 1,
+      "id": 1,
+      "name": "Group A"
+    },
+    {
+      "count": 25,
+      "course": 2,
+      "id": 2,
+      "name": "Group B"
+    },
+    {
+      "count": 28,
+      "course": 3,
+      "id": 3,
+      "name": "Group C"
+    },
+    {
+      "count": 22,
+      "course": 1,
+      "id": 4,
+      "name": "Group Test 1"
+    }
+  ]
+}

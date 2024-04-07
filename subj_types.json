@@ -1,0 +1,20 @@
+{
+  "subj_types": [
+    {
+      "id": 1,
+      "type": "Lecture"
+    },
+    {
+      "id": 2,
+      "type": "Seminar"
+    },
+    {
+      "id": 3,
+      "type": "Exam"
+    },
+    {
+      "id": 4,
+      "type": "Test2"
+    }
+  ]
+}

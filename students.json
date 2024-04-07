@@ -1,0 +1,60 @@
+{
+  "students": [
+    {
+      "age": 20,
+      "group_id": 1,
+      "id": 1,
+      "name": "John",
+      "second_name": "Doe"
+    },
+    {
+      "age": 22,
+      "group_id": 2,
+      "id": 2,
+      "name": "Alice",
+      "second_name": "Smith"
+    },
+    {
+      "age": 21,
+      "group_id": 1,
+      "id": 3,
+      "name": "Bob",
+      "second_name": "Johnson"
+    },
+    {
+      "age": 23,
+      "group_id": 3,
+      "id": 4,
+      "name": "Eva",
+      "second_name": "Brown"
+    },
+    {
+      "age": 19,
+      "group_id": 2,
+      "id": 5,
+      "name": "Charlie",
+      "second_name": "Davis"
+    },
+    {
+      "age": 20,
+      "group_id": 1,
+      "id": 6,
+      "name": "Mark",
+      "second_name": "Devidson"
+    },
+    {
+      "age": 21,
+      "group_id": 2,
+      "id": 7,
+      "name": "Test1",
+      "second_name": "Test1"
+    },
+    {
+      "age": 22,
+      "group_id": 2,
+      "id": 8,
+      "name": "\u0412\u0430\u0441\u044f",
+      "second_name": "Test1"
+    }
+  ]
+}

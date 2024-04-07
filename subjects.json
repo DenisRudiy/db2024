@@ -1,0 +1,40 @@
+{
+  "subjects": [
+    {
+      "id": 1,
+      "name": "Math",
+      "teacher": "Mr. White",
+      "type_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Physics",
+      "teacher": "Mrs. Green",
+      "type_id": 2
+    },
+    {
+      "id": 3,
+      "name": "Chemistry",
+      "teacher": "Dr. Black",
+      "type_id": 1
+    },
+    {
+      "id": 4,
+      "name": "History",
+      "teacher": "Ms. Grey",
+      "type_id": 3
+    },
+    {
+      "id": 5,
+      "name": "Biology",
+      "teacher": "Prof. Brown",
+      "type_id": 2
+    },
+    {
+      "id": 6,
+      "name": "Test1",
+      "teacher": "Test1",
+      "type_id": 2
+    }
+  ]
+}
