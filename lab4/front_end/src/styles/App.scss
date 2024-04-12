@@ -1,0 +1,116 @@
+.App {
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #282c34;
+
+  .Title {
+    text-transform: uppercase;
+    color: white;
+    padding: 40px;
+    font-size: 50px;
+  }
+
+  .BtnSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      outline: none !important;
+      width: 150px;
+      height: 40px;
+      cursor: pointer;
+      border-radius: 10px;
+      border: none;
+      transition: 0.4s all;
+
+      &:hover {
+        transform: scale(1.05);
+        background-color: rgb(188, 188, 188);
+      }
+      &:hover p {
+        color: black;
+      }
+      &:active {
+        transform: translateY(10px);
+      }
+
+      p {
+        font-family: "Roboto", sans-serif;
+        color: rgb(118, 118, 118);
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 700;
+        transition: 0.4s all;
+      }
+    }
+  }
+
+  .Sidebar {
+    position: absolute;
+    top: 0;
+    background-color: white;
+    height: 100vh;
+    width: 50px;
+    transition: 0.4s all;
+
+    &:hover {
+      width: 200px;
+    }
+    &:hover .Sidebar_items button .Button_data {
+      opacity: 1;
+      font-size: 12px;
+    }
+    .Sidebar_items {
+      display: flex;
+      flex-direction: column;
+
+      button {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        outline: none;
+        cursor: pointer;
+        margin: 10px;
+        border: none;
+        background-color: white;
+        transition: 0.4s all;
+        border-radius: 10px;
+
+        &:hover .Button_data {
+          color: black;
+        }
+
+        &:hover {
+          background-color: rgb(202, 202, 202);
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        }
+        &:active {
+          transform: translateY(10px);
+        }
+
+        .Button_data {
+          font-family: "Roboto", sans-serif;
+          font-weight: 500;
+          color: rgb(118, 118, 118);
+          text-transform: uppercase;
+          transition: 0.4s all;
+          margin-left: 10px;
+          opacity: 0;
+          font-size: 1px;
+        }
+      }
+    }
+  }
+
+  .Data {
+    margin-top: 50px;
+    color: white;
+  }
+}
