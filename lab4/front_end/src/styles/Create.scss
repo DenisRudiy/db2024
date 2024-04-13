@@ -1,0 +1,51 @@
+.Create {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+
+  input {
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-family: "Roboto", sans-serif;
+    padding: 10px;
+    border: 2px solid rgba(0, 0, 0, 0);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    transition: 0.4s all;
+
+    &:focus {
+      border: 2px solid rgb(30, 16, 75);
+    }
+  }
+
+  .btnCreate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(24, 112, 24);
+    border-radius: 10px;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    width: 120px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+
+    transition: 0.4s all;
+
+    &:hover {
+      background-color: rgb(16, 87, 16);
+    }
+    &:active {
+      transform: translateY(10px);
+    }
+  }
+}

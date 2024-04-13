@@ -9,6 +9,22 @@ export const getData = async (data: string) => {
   }
 };
 
+export const createData = async (data: any, insertingData: any) => {
+  try {
+    const response = await fetch(`http://localhost:3100/${data}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(insertingData),
+    });
+    return response;
+  } catch (error) {
+    console.error("Error creating student:", error);
+    throw error;
+  }
+};
+
 export const delData = async (data: string, id: number) => {
   try {
     const response = await fetch(`http://localhost:3100/${data}/${id}`, {

@@ -23,7 +23,7 @@ router.get("/students", async (req, res) => {
   try {
     const db = client.db("lab4_2024");
     const collection = db.collection("students");
-    const documents = await collection.find().toArray();
+    const documents = await collection.find().sort({ _id: 1 }).toArray();
     res.json(documents);
   } catch (error) {
     res.status(500).json({ message: "Ошибка при получении данных из базы данных" });
@@ -33,7 +33,7 @@ router.get("/groups", async (req, res) => {
   try {
     const db = client.db("lab4_2024");
     const collection = db.collection("groups");
-    const documents = await collection.find().toArray();
+    const documents = await collection.find().sort({ _id: 1 }).toArray();
     res.json(documents);
   } catch (error) {
     res.status(500).json({ message: "Ошибка при получении данных из базы данных" });
@@ -43,7 +43,7 @@ router.get("/subjects", async (req, res) => {
   try {
     const db = client.db("lab4_2024");
     const collection = db.collection("subjects");
-    const documents = await collection.find().toArray();
+    const documents = await collection.find().sort({ _id: 1 }).toArray();
     res.json(documents);
   } catch (error) {
     res.status(500).json({ message: "Ошибка при получении данных из базы данных" });
@@ -53,7 +53,7 @@ router.get("/subj_types", async (req, res) => {
   try {
     const db = client.db("lab4_2024");
     const collection = db.collection("subj_types");
-    const documents = await collection.find().toArray();
+    const documents = await collection.find().sort({ _id: 1 }).toArray();
     res.json(documents);
   } catch (error) {
     res.status(500).json({ message: "Ошибка при получении данных из базы данных" });
@@ -63,7 +63,7 @@ router.get("/grades", async (req, res) => {
   try {
     const db = client.db("lab4_2024");
     const collection = db.collection("grades");
-    const documents = await collection.find().toArray();
+    const documents = await collection.find().sort({ _id: 1 }).toArray();
     res.json(documents);
   } catch (error) {
     res.status(500).json({ message: "Ошибка при получении данных из базы данных" });
@@ -344,7 +344,6 @@ router.delete("/del_student/:id", async (req, res) => {
     const collection = db.collection("students");
 
     const id = parseInt(req.params.id);
-    console.log(id);
 
     const result = await collection.deleteOne({ _id: id });
 
@@ -360,7 +359,6 @@ router.delete("/del_group/:id", async (req, res) => {
     const collection = db.collection("groups");
 
     const id = parseInt(req.params.id);
-    console.log(id);
 
     const result = await collection.deleteOne({ _id: id });
 
@@ -376,7 +374,6 @@ router.delete("/del_subject/:id", async (req, res) => {
     const collection = db.collection("subjects");
 
     const id = parseInt(req.params.id);
-    console.log(id);
 
     const result = await collection.deleteOne({ _id: id });
 
@@ -392,7 +389,6 @@ router.delete("/del_subj_type/:id", async (req, res) => {
     const collection = db.collection("subj_types");
 
     const id = parseInt(req.params.id);
-    console.log(id);
 
     const result = await collection.deleteOne({ _id: id });
 
@@ -408,7 +404,6 @@ router.delete("/del_grade/:id", async (req, res) => {
     const collection = db.collection("grades");
 
     const id = parseInt(req.params.id);
-    console.log(id);
 
     const result = await collection.deleteOne({ _id: id });
 
