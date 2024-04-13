@@ -8,6 +8,18 @@ import ReadGroup from "./components/groups/ReadGroup";
 import ReadSubject from "./components/subjects/ReadSubject";
 import ReadSubjType from "./components/subj_types/ReadSubjType";
 import ReadGrade from "./components/grades/ReadGrade";
+import CreateGroup from "./components/groups/CreateGroup";
+import DeleteGroup from "./components/groups/DeleteGroup";
+import UpdateGroup from "./components/groups/UpdateGroup";
+import DeleteSubject from "./components/subjects/DeleteSubject";
+import CreateSubject from "./components/subjects/CreateSubject";
+import UpdateSubject from "./components/subjects/UpdateSubject";
+import DeleteSubjType from "./components/subj_types/DeleteSubjType";
+import CreateSubjType from "./components/subj_types/CreateSubjType";
+import UpdateSubjType from "./components/subj_types/UpdateSubjType";
+import DeleteGrade from "./components/grades/DeleteGrade";
+import CreateGrade from "./components/grades/CreateGrade";
+import UpdateGrade from "./components/grades/UpdateGrade";
 
 function App() {
   const [type, setType] = useState("Students");
@@ -110,9 +122,9 @@ function App() {
         {type === "Groups" ? (
           <>
             {action === "Read" ? <ReadGroup></ReadGroup> : <></>}
-            {action === "Create" ? <CreateStudent></CreateStudent> : <></>}
-            {action === "Update" ? <UpdateStudent></UpdateStudent> : <></>}
-            {action === "Delete" ? <DeleteStudent></DeleteStudent> : <></>}
+            {action === "Create" ? <CreateGroup></CreateGroup> : <></>}
+            {action === "Update" ? <UpdateGroup></UpdateGroup> : <></>}
+            {action === "Delete" ? <DeleteGroup></DeleteGroup> : <></>}
           </>
         ) : (
           <></>
@@ -120,9 +132,9 @@ function App() {
         {type === "Subjects" ? (
           <>
             {action === "Read" ? <ReadSubject></ReadSubject> : <></>}
-            {action === "Create" ? <CreateStudent></CreateStudent> : <></>}
-            {action === "Update" ? <UpdateStudent></UpdateStudent> : <></>}
-            {action === "Delete" ? <DeleteStudent></DeleteStudent> : <></>}
+            {action === "Create" ? <CreateSubject></CreateSubject> : <></>}
+            {action === "Update" ? <UpdateSubject></UpdateSubject> : <></>}
+            {action === "Delete" ? <DeleteSubject></DeleteSubject> : <></>}
           </>
         ) : (
           <></>
@@ -130,9 +142,9 @@ function App() {
         {type === "Subject Types" ? (
           <>
             {action === "Read" ? <ReadSubjType></ReadSubjType> : <></>}
-            {action === "Create" ? <CreateStudent></CreateStudent> : <></>}
-            {action === "Update" ? <UpdateStudent></UpdateStudent> : <></>}
-            {action === "Delete" ? <DeleteStudent></DeleteStudent> : <></>}
+            {action === "Create" ? <CreateSubjType></CreateSubjType> : <></>}
+            {action === "Update" ? <UpdateSubjType></UpdateSubjType> : <></>}
+            {action === "Delete" ? <DeleteSubjType></DeleteSubjType> : <></>}
           </>
         ) : (
           <></>
@@ -140,9 +152,9 @@ function App() {
         {type === "Grades" ? (
           <>
             {action === "Read" ? <ReadGrade></ReadGrade> : <></>}
-            {action === "Create" ? <CreateStudent></CreateStudent> : <></>}
-            {action === "Update" ? <UpdateStudent></UpdateStudent> : <></>}
-            {action === "Delete" ? <DeleteStudent></DeleteStudent> : <></>}
+            {action === "Create" ? <CreateGrade></CreateGrade> : <></>}
+            {action === "Update" ? <UpdateGrade></UpdateGrade> : <></>}
+            {action === "Delete" ? <DeleteGrade></DeleteGrade> : <></>}
           </>
         ) : (
           <></>

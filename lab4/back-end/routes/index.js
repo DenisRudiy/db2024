@@ -203,7 +203,7 @@ router.post("/new_group", async (req, res) => {
 router.post("/new_subject", async (req, res) => {
   try {
     const db = client.db("lab4_2024");
-    const collection = db.collection("subject");
+    const collection = db.collection("subjects");
 
     const newSubject = req.body;
 
@@ -306,7 +306,7 @@ router.put("/update_subj_type/:id", async (req, res) => {
     const db = client.db("lab4_2024");
     const collection = db.collection("subj_types");
     const id = parseInt(req.params.id);
-    const type = req.body;
+    const type = req.body.type;
 
     const result = await collection.updateOne({ _id: id }, { $set: { type: type } });
 
