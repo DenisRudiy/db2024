@@ -1,4 +1,5 @@
-.Create {
+.Create,
+.UpdateForm {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +23,8 @@
     }
   }
 
-  .btnCreate {
+  .btnCreate,
+  .btnUpdate {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,6 +48,13 @@
     }
     &:active {
       transform: translateY(10px);
+    }
+  }
+
+  .btnUpdate {
+    background-color: rgb(201, 145, 42);
+    &:hover {
+      background-color: rgb(115, 83, 23);
     }
   }
 }

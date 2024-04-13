@@ -1,8 +1,8 @@
 import { Toast } from "primereact/toast";
-import "../../styles/Create.scss";
 import { useEffect, useRef, useState } from "react";
 import { createData, getData } from "../../services/CrudDataService";
 import { Student } from "../../interfaces/student.interface";
+import "../../styles/Create.scss";
 
 const CreateStudent = () => {
   const toast = useRef<Toast | null>(null);

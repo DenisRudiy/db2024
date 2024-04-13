@@ -2,7 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   color: black;
+  gap: 50px;
   table {
     border: none;
   }
@@ -21,7 +23,8 @@
     background-color: white;
     border-bottom: 1px solid rgb(142, 142, 142);
 
-    .Delete {
+    .Delete,
+    .Update {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -41,6 +44,12 @@
       }
       &:active {
         transform: translateY(10px);
+      }
+    }
+    .Update {
+      background-color: rgb(201, 145, 42);
+      &:hover {
+        background-color: rgb(115, 83, 23);
       }
     }
   }

@@ -25,6 +25,22 @@ export const createData = async (data: any, insertingData: any) => {
   }
 };
 
+export const updateData = async (data: string, id: number, updatingData: any) => {
+  try {
+    const response = await fetch(`http://localhost:3100/${data}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatingData),
+    });
+    return response;
+  } catch (error) {
+    console.error("Error updating data:", error);
+    throw error;
+  }
+};
+
 export const delData = async (data: string, id: number) => {
   try {
     const response = await fetch(`http://localhost:3100/${data}/${id}`, {
