@@ -1,5 +1,5 @@
 export interface Group {
-  id: number;
+  _id: number;
   name: string;
   course: number;
   count: number;
