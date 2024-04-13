@@ -13,10 +13,7 @@ function App() {
   const [type, setType] = useState("Students");
   const [action, setAction] = useState("Read");
 
-  useEffect(() => {
-    console.log(type, action);
-    console.log(type === "Student");
-  }, [type, action]);
+  useEffect(() => {}, [type, action]);
 
   return (
     <div className="App">
